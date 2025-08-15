@@ -13,9 +13,7 @@ use Inertia\Inertia;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
         $user = auth()->user();
@@ -58,9 +56,7 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+  
     public function create()
     {
         $categories = Category::get();
@@ -70,9 +66,7 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+ 
     public function store(PostCreateRequest $request)
     {
         $data = $request->validated();
@@ -103,9 +97,6 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Post $post)
     {
         if ($post->user_id !== Auth::id()) {
@@ -118,9 +109,7 @@ class PostController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(PostUpdateRequest $request, Post $post)
     {
         if ($post->user_id !== Auth::id()) {
@@ -140,9 +129,7 @@ class PostController extends Controller
         return redirect()->route('myPosts');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
     public function destroy(Post $post)
     {
         if ($post->user_id !== Auth::id()) {
