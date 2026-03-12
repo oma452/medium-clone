@@ -1,53 +1,152 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Medium Clone
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A full-stack blogging platform inspired by Medium, built with modern web technologies. This application provides a clean, intuitive interface for creating and sharing long-form content with features like user authentication, profile management, post categorization, and social interactions.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- **User Authentication** - Secure registration and login system with Laravel Breeze
+- **Post Management** - Create, edit, and delete articles with rich media support
+- **Categories & Tags** - Organize content with customizable categories
+- **Social Interactions** - Follow users and clap (like) posts
+- **User Profiles** - Personalized profiles with bio and follower statistics
+- **Responsive Design** - Mobile-first UI built with Tailwind CSS
+- **Media Library** - Upload and manage images using Spatie Media Library
+- **SEO-Friendly URLs** - Automatic slug generation for posts and profiles
+- **Docker Support** - Fully containerized development environment
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Tech Stack
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+**Backend:**
+- PHP 8.2
+- Laravel 12
+- MySQL 8.0
+- Inertia.js
 
-## Learning Laravel
+**Frontend:**
+- React 19
+- Tailwind CSS
+- Alpine.js
+- Vite
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+**Development:**
+- Docker & Docker Compose
+- Pest (Testing)
+- Scribe (API Documentation)
+- Laravel Pint (Code Style)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Installation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Using Docker (Recommended)
 
-## Laravel Sponsors
+1. Clone the repository:
+```bash
+git clone https://github.com/oma452/medium-clone.git
+cd medium-clone
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. Copy the environment file:
+```bash
+cp .env.example .env
+```
 
-### Premium Partners
+3. Build and start the Docker containers:
+```bash
+docker-compose up -d
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+4. Install dependencies and setup the application:
+```bash
+docker-compose exec app composer install
+docker-compose exec app php artisan key:generate
+docker-compose exec app php artisan migrate --seed
+```
+
+5. Install frontend dependencies:
+```bash
+npm install
+npm run build
+```
+
+6. Access the application at `http://localhost:8080`
+
+### Manual Installation
+
+1. Clone the repository and install dependencies:
+```bash
+git clone https://github.com/oma452/medium-clone.git
+cd medium-clone
+composer install
+npm install
+```
+
+2. Configure environment:
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+3. Update `.env` with your database credentials and run migrations:
+```bash
+php artisan migrate --seed
+```
+
+4. Build assets and start the development server:
+```bash
+npm run dev
+php artisan serve
+```
+
+## Usage
+
+### Creating Posts
+1. Register or login to your account
+2. Navigate to "Create Post"
+3. Add your title, content, and select a category
+4. Upload a cover image (optional)
+5. Publish your post
+
+### Following Users
+Visit any user's profile and click "Follow" to see their posts in your feed.
+
+### Interacting with Posts
+- **Clap** - Show appreciation by clapping for posts (similar to likes)
+- **Share** - Share posts with your network
+- **Comment** - Engage with authors and readers
+
+## API Documentation
+
+API documentation is available via Scribe. Generate the docs with:
+```bash
+php artisan scribe:generate
+```
+Access at `/docs` after generation.
+
+## Testing
+
+Run the test suite:
+```bash
+php artisan test
+```
+
+Or using Pest directly:
+```bash
+./vendor/bin/pest
+```
+
+## Future Improvements
+
+- Comments system for post discussions
+- Bookmarking and reading lists
+- Draft auto-save functionality
+- Email notifications for followers
+- Advanced search with filters
+- Reading time estimation
+- Social media sharing integration
+- Dark mode support
+
+## License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ## Contributing
 
