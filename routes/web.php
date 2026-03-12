@@ -75,6 +75,15 @@ Route::middleware(['auth', 'verified'])->group(function() {
     });
 });
 
+/**
+ * Get first category
+ * @return \App\Http\Resources\CategoryResponse
+ */
+Route::get('/api/category', function(): \App\Http\Resources\CategoryResponse {
+    $category = \App\Models\Category::first();
+    return new \App\Http\Resources\CategoryResponse($category);
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

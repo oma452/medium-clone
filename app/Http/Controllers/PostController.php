@@ -50,6 +50,13 @@ class PostController extends Controller
             }
         }
 
+        if (request()->expectsJson()) {
+            return response()->json([
+                'posts' => $posts,
+                'categories' => $categories,
+            ]);
+        }
+
         return Inertia::render('Posts/Index', [
             'posts' => $posts,
             'categories' => $categories,
@@ -83,6 +90,13 @@ class PostController extends Controller
             $post->update(['image' => $imagePath]);
         }
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'post' => $post->load(['user', 'category'])
+            ], 201);
+        }
+
         return redirect()->route('dashboard');
     }
 
@@ -92,6 +106,11 @@ class PostController extends Controller
     public function show(string $username, Post $post)
     {
         $post->load(['user', 'category', 'claps.user']);
+        
+        if (request()->expectsJson()) {
+            return response()->json(['post' => $post]);
+        }
+        
         return Inertia::render('Posts/Show', [
             'post' => $post,
         ]);
