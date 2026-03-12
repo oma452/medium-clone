@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php-apache.Dockerfile
+    volumes:
+      # Mount the Laravel project as the web root
+      - .:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      # Use these in your inner .env
+      MYSQL_DATABASE: medium_clone
+      MYSQL_USER: laravel
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    # No port mapping to avoid conflict with Windows MySQL
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
